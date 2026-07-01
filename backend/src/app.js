@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
+const app = express();
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -22,7 +23,6 @@ const fileRoutes = require("./routes/fileRoutes");
 const statsRoutes = require("./routes/statsRoutes");
 const studentMgmtRoutes = require("./routes/studentMgmtRoutes");
 
-const app = express();
 
 
 function healthAt(base) {
