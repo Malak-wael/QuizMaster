@@ -1,6 +1,16 @@
 const express = require("express");
 const cors = require("cors");
 
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  credentials: true
+}));
+
+app.options('*', cors());
+app.use(express.json({ limit: "12mb" }));
+
 const authRoutes = require("./routes/authRoutes");
 const { router: quizRoutes } = require("./routes/quizRoutes");
 const sessionRoutes = require("./routes/sessionRoutes");
@@ -14,15 +24,6 @@ const studentMgmtRoutes = require("./routes/studentMgmtRoutes");
 
 const app = express();
 
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
-  credentials: true
-}));
-
-app.options('*', cors());
-app.use(express.json({ limit: "12mb" }));
 
 function healthAt(base) {
   app.get(`${base}/health`, (_req, res) => {
